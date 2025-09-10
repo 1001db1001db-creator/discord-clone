@@ -1,0 +1,42 @@
+// ✅ Ton code de config Firebase (copié depuis la console Firebase)
+const firebaseConfig = {
+    apiKey: "TON_API_KEY",
+    authDomain: "TON_PROJET.firebaseapp.com",
+    projectId: "TON_PROJET",
+    storageBucket: "TON_PROJET.appspot.com",
+    messagingSenderId: "TON_ID",
+    appId: "TON_APP_ID"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  
+  const chat = document.getElementById("chat");
+  const messageInput = document.getElementById("messageInput");
+  
+  // 🔁 Écoute en temps réel les nouveaux messages
+  db.collection("messages").orderBy("timestamp").onSnapshot(snapshot => {
+    chat.innerHTML = "";
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const div = document.createElement("div");
+      div.className = "message";
+      div.innerHTML = `<strong>${data.username}:</strong> ${data.text}`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    });
+  });
+  
+  function sendMessage() {
+    const text = messageInput.value;
+    if (text.trim() === "") return;
+  
+    db.collection("messages").add({
+      username: "Anonyme", // Tu peux remplacer ça par un vrai utilisateur
+      text: text,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  
+    messageInput.value = "";
+  }
+  

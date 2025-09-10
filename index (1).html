@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Discord Clone</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="server">💬</div>
+    <div class="server">🎮</div>
+    <div class="server">🎵</div>
+  </div>
+
+  <div class="main">
+    <div class="header"># général</div>
+
+    <div class="chat" id="chat"></div>
+
+    <div class="input-area">
+      <input type="text" id="messageInput" placeholder="Envoyer un message..." />
+      <button onclick="sendMessage()">Envoyer</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
